@@ -1,4 +1,1 @@
-# C-Projects-
-# C-Projects-
-# C-Projects-
-# C-Projects-
+Welcome to BetHub CLI, a modular command-line interface application built in C++. This project serves as a personal learning playground. A slow-and-steady "learning cave" where I experiment with C++ fundamentals, refactor codebases, and gradually introduce more advanced programming concepts over time.
