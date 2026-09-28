@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <cstdlib> //primarily used this just to clear the terminal text.
 #include <fstream> //used for read/write functions
 #include <iostream>
@@ -153,7 +154,9 @@ void Login()
         std::cout << "Enter Password: ";
         std::cin >> pass;
     }
-    std::cout << "Login successful.\nRedirecting to Main Dashboard....." << std::endl;
+    int operation;
+    printf("==========================================\nBETHUB CLI - Main Menu (%s)\nBalance: $0\n==========================================\n\n[1] View Available Events\n[2] Create Ticket\n[3] My Tickets (view / edit / delete)\n[4] Banking\n[5] Log Out\n[2] Exit\n\nSelect an option: ", Database[username].first_name.c_str());
+    std::cin >> operation;
 }
 
 int main()
