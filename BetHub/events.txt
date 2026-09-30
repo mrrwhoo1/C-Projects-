@@ -1,0 +1,42 @@
+1|Zesco United vs Power Dynamos|2.15
+2|Green Eagles vs Zanaco|1.85
+3|Red Arrows vs Nkana|2.05
+4|Mamelodi Sundowns vs Kaizer Chiefs|1.42
+5|Orlando Pirates vs AmaZulu|1.68
+6|Al Ahly vs Zamalek|1.74
+7|Esperance vs Club Africain|1.91
+8|Wydad Casablanca vs Raja Casablanca|2.28
+9|Manchester City vs Tottenham|1.63
+10|Liverpool vs Aston Villa|1.57
+11|Arsenal vs Newcastle United|1.72
+12|Chelsea vs Crystal Palace|1.88
+13|Real Madrid vs Sevilla|1.49
+14|Barcelona vs Athletic Bilbao|1.67
+15|Atletico Madrid vs Villarreal|1.93
+16|Bayern Munich vs Borussia Dortmund|1.61
+17|RB Leipzig vs Eintracht Frankfurt|2.11
+18|Bayer Leverkusen vs Stuttgart|1.79
+19|Inter Milan vs Lazio|1.66
+20|AC Milan vs Fiorentina|1.82
+21|Juventus vs Napoli|2.07
+22|Roma vs Atalanta|2.24
+23|PSG vs Monaco|1.54
+24|Marseille vs Lyon|2.18
+25|Ajax vs PSV Eindhoven|2.31
+26|Feyenoord vs AZ Alkmaar|1.76
+27|Benfica vs Braga|1.58
+28|Porto vs Sporting CP|2.12
+29|Galatasaray vs Fenerbahce|2.03
+30|Celtic vs Rangers|1.87
+31|Boca Juniors vs River Plate|2.42
+32|Flamengo vs Palmeiras|2.16
+33|Santos vs Gremio|2.36
+34|Club America vs Cruz Azul|1.94
+35|Monterrey vs Tigres UANL|2.08
+36|LA Galaxy vs Seattle Sounders|2.27
+37|Inter Miami vs Atlanta United|1.71
+38|Al Hilal vs Al Nassr|2.01
+39|Urawa Red Diamonds vs Yokohama F Marinos|2.34
+40|Jeonbuk Hyundai Motors vs FC Seoul|1.96
+41|Sydney FC vs Melbourne Victory|2.13
+42|Auckland City vs Wellington Olympic|1.83

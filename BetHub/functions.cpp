@@ -6,7 +6,9 @@
 
 // GlOBAL DATA
 std::map<std::string, UserProfile> Database;
+std::map<int, std::pair<std::string, double>> AvailableEvents;
 const std::string DB_FILE = "database.txt";
+const std::string EVENTS_DB = "events.txt";
 
 //=============================== HELPER FUNCTION TO SAVE DATA
 void save_to_database()
@@ -35,7 +37,7 @@ void save_to_database()
 //====================================================== HELPER FUN TO LOAD THE DB
 void load_database()
 {
-    std::ifstream file(DB_FILE);
+    std::ifstream file(DB_FILE); // open for reading.
 
     if (!file.is_open()) { // obviosly will run the first time this program initiates cause the file does not exist unless otherwise.
         return;
@@ -157,6 +159,43 @@ void sign_up()
     std::cout << "\nAccount successfully created for " << username << "!\nReturning to main menu...\n";
 }
 
+//========================================== USER DASHBOARD MENU
+void user_dashboard(std::string username)
+{
+    int operation = 0;
+
+    // this jst keeps the user logged in until they choose [5] Log Out.
+    while (operation != 5) {
+#if defined(_WIN32) || defined(_WIN64)
+        std::system("cls");
+#else
+        std::system("clear");
+#endif
+
+        printf("==========================================\nBETHUB CLI - Main Menu (%s)\nBalance: $%d\n==========================================\n\n[1] View Available Events\n[2] Create Ticket\n[3] My Tickets (view / edit / delete)\n[4] Banking\n[5] Log Out\n\nSelect an option: ",
+            Database[username].first_name.c_str(),
+            Database[username].balance);
+
+        std::cin >> operation;
+
+        if (operation == 1) {
+#if defined(_WIN32) || defined(_WIN64)
+            std::system("cls");
+#else
+            std::system("clear");
+#endif
+            ViewEvents();
+
+            // Pause so the user can read the events before clearing the screen
+            std::cout << "\nPress Enter to return to menu...";
+            std::cin.ignore(); // Clear leftover '1'.
+            std::cin.get();
+        } else if (operation == 5) {
+            std::cout << "\nLogging out...\n";
+        }
+    }
+}
+
 //==========================================LOGIN FUNCTION
 void Login()
 {
@@ -181,7 +220,52 @@ void Login()
         std::cout << "Enter Password: ";
         std::cin >> pass;
     }
-    int operation;
-    printf("==========================================\nBETHUB CLI - Main Menu (%s)\nBalance: $%d\n==========================================\n\n[1] View Available Events\n[2] Create Ticket\n[3] My Tickets (view / edit / delete)\n[4] Banking\n[5] Log Out\n[2] Exit\n\nSelect an option: ", Database[username].first_name.c_str(), Database[username].balance);
-    std::cin >> operation;
+
+    user_dashboard(username);
+}
+
+//============================================ VIEW EVENTS
+
+void ViewEvents()
+{
+    std::ifstream file("events.txt");
+
+    if (!file.is_open()) {
+        return; // File doesn't exist yet, which is fine
+    }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        if (line.empty())
+            continue;
+
+        std::stringstream ss(line);
+        std::string id_str, teams, odds_str;
+
+        // Parse: ID | Teams | Odds
+        if (std::getline(ss, id_str, '|') && std::getline(ss, teams, '|') && std::getline(ss, odds_str, '\n')) {
+
+            int id = std::stoi(id_str);
+            double odds = std::stod(odds_str); // std::stod turns string into double
+
+            AvailableEvents[id] = { teams, odds };
+        }
+    }
+
+    // Print a wider, clean table header
+    std::cout << "=================================================================\n";
+    std::cout << "ID   Match Name                                      Odds\n";
+    std::cout << "=================================================================\n";
+
+    for (const auto& data : AvailableEvents) {
+        int MatchID = data.first;
+        std::string Team = data.second.first;
+        double Odds = data.second.second;
+
+        // %-45s gives a generous 45 spaces for the team names
+        printf("[%2d]  %-45s  %.2f\n", MatchID, Team.c_str(), Odds);
+    }
+
+    std::cout << "=================================================================\n";
+    file.close();
 }

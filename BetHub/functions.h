@@ -6,6 +6,7 @@
 #include <map>
 #include <sstream> //required for splitting new lines into variables easily.
 #include <string>
+#include <utility> //used for 'pair' in the view tickets function
 
 struct UserProfile {
     std::string first_name;
@@ -17,7 +18,9 @@ struct UserProfile {
 
 // NOTE TO self: extern tells the compiler the varibale live in another file.
 extern std::map<std::string, UserProfile> Database;
+extern std::map<int, std::pair<std::string, double>> AvailableEvents;
 extern const std::string DB_FILE;
+extern const std::string EVENTS_DB;
 
 // Functions
 void save_to_database();
