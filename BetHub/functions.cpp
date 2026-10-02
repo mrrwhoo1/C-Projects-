@@ -192,6 +192,13 @@ void user_dashboard(std::string username)
             std::cin.get();
         } else if (operation == 5) {
             std::cout << "\nLogging out...\n";
+        } else if (operation == 2) {
+#if defined(_WIN32) || defined(_WIN64)
+            std::system("cls");
+#else
+            std::system("clear");
+#endif
+            CreateTicket(username);
         }
     }
 }
@@ -228,7 +235,7 @@ void Login()
 
 void ViewEvents()
 {
-    std::ifstream file("events.txt");
+    std::ifstream file(EVENTS_DB);
 
     if (!file.is_open()) {
         return; // File doesn't exist yet, which is fine
@@ -268,4 +275,25 @@ void ViewEvents()
 
     std::cout << "=================================================================\n";
     file.close();
+}
+
+//=============================================== CREATE TICKET
+void CreateTicket(std::string& username)
+{
+    int operation;
+    if (Database[username].balance <= 0) {
+
+        std::cout << "=== Create a New Ticket ===\n";
+        std::cout << "Your available balance: $" << Database[username].balance << "\n";
+
+        std::cout << "Balance too low to create ticket.\n[1]. Top up.\n[2]. Back\n[3]. Close App.\noperation: ";
+        std::cin >> operation;
+        if (operation == 3) {
+            std::cout << "closing....\n";
+            std::exit(0);
+
+        } else if (operation == 2) {
+            return;
+        }
+    }
 }

@@ -29,7 +29,7 @@ bool endwithGmail(std::string& email);
 void sign_up();
 void Login();
 void ViewEvents();
-void CreateTicket();
+void CreateTicket(std::string& username);
 void MyTickets();
 void Banking();
 void Logout();
