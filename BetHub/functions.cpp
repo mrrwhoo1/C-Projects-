@@ -162,6 +162,11 @@ void sign_up()
 //========================================== USER DASHBOARD MENU
 void user_dashboard(std::string username)
 {
+#if defined(_WIN32) || defined(_WIN64)
+    std::system("cls");
+#else
+    std::system("clear");
+#endif
     int operation = 0;
 
     // this jst keeps the user logged in until they choose [5] Log Out.
@@ -283,7 +288,7 @@ void CreateTicket(std::string& username)
     int operation;
     if (Database[username].balance <= 0) {
 
-        std::cout << "=== Create a New Ticket ===\n";
+        // std::cout << "=== Create a New Ticket ===\n";
         std::cout << "Your available balance: $" << Database[username].balance << "\n";
 
         std::cout << "Balance too low to create ticket.\n[1]. Top up.\n[2]. Back\n[3]. Close App.\noperation: ";
@@ -294,6 +299,72 @@ void CreateTicket(std::string& username)
 
         } else if (operation == 2) {
             return;
+        }
+    }
+
+    int game_id;
+    int action;
+
+    ViewEvents();
+
+    std::cout << "\nPress [0] to go back.\n\n";
+    std::cout << "Enter game ID to add to betslip: ";
+    double total_odds = 1.0;
+
+    while (true) {
+
+        std::cin >> game_id;
+
+        if (game_id == 0) {
+            return;
+        }
+
+        if (AvailableEvents.count(game_id)) {
+            std::string game_name = AvailableEvents[game_id].first;
+
+            double odds = AvailableEvents[game_id].second;
+            total_odds *= odds;
+            printf("Game: %s Added to Bet slip.\nODDS: %.2f\nTotal ODDS: %.2f", game_name.c_str(), odds, total_odds);
+
+            std::cout << "\n\nAdd another match?\n";
+            std::cout << "[1] Yes\n";
+            std::cout << "[2] Confirm ticket\n";
+            std::cout << "Choice: ";
+
+            std::cin >> action;
+
+            if (action == 2) {
+                float bet_ammount;
+#if defined(_WIN32) || defined(_WIN64)
+                std::system("cls");
+#else
+                std::system("clear");
+#endif
+                printf("TOTAL BALANCE: %d\n", Database[username].balance);
+                std::cout << "Enter Amount to place bet on: ";
+                std::cin >> bet_ammount;
+                while (bet_ammount > Database[username].balance) {
+                    std::cout << "Insufficient Funds, try again or [0] to exit: ";
+                    std::cin >> bet_ammount;
+                }
+                std::cout << "processing....." << std::flush;
+                std::this_thread::sleep_for(std::chrono::seconds(2));
+
+                Database[username].balance -= bet_ammount;
+                save_to_database();
+
+                std::cout << "\nBet Successful! Total Pay out: $" << bet_ammount * total_odds << "\n";
+
+                std::cout << "\nPress Enter to return to the Dashboard...";
+                std::cin.ignore();
+                std::cin.get();
+
+                return;
+            }
+
+            std::cout << "\nEnter game ID: ";
+        } else {
+            std::cout << "Invalid Match ID, try again: ";
         }
     }
 }

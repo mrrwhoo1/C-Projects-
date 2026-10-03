@@ -1,11 +1,13 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <chrono> // Required for std::chrono::seconds
 #include <fstream> //used for read/write functions
 #include <iostream>
 #include <map>
 #include <sstream> //required for splitting new lines into variables easily.
 #include <string>
+#include <thread> // Required for std::this_thread::sleep_for
 #include <utility> //used for 'pair' in the view tickets function
 
 struct UserProfile {
